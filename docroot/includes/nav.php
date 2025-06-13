@@ -33,7 +33,7 @@ $pages = [
   [
     'label' => 'CSS-only LQIP',
     'file' => 'css-lqip.php',
-    'desc' => 'Pure CSS LQIP: dominant color or gradient as background, hero image fades in on top.'
+    'desc' => 'Pure CSS LQIP: dominant color or gradient as background, hero image fades in on top of a blurry CSS placeholder. Inspired by <a href="https://leanrada.com/notes/css-only-lqip/" target="_blank" rel="noopener">leanrada.com</a>.'
   ],
   [
     'label' => 'Credits',
