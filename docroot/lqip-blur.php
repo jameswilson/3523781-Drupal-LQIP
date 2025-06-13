@@ -14,10 +14,43 @@ $target_size = intval($lqip_lcp_w * $lqip_lcp_h * $target_bpp);
 $im = imagecreatefromjpeg($src);
 $tiny = imagecreatetruecolor($lqip_tiny_w, $lqip_tiny_h);
 imagecopyresampled($tiny, $im, 0, 0, 0, 0, $lqip_tiny_w, $lqip_tiny_h, imagesx($im), imagesy($im));
+
+// Apply a simple box blur to the tiny image
+function smooth_gd_image($im, $w, $h) {
+    $smoothed = imagecreatetruecolor($w, $h);
+    for ($y = 0; $y < $h; $y++) {
+        for ($x = 0; $x < $w; $x++) {
+            $r = $g = $b = $count = 0;
+            for ($dy = -1; $dy <= 1; $dy++) {
+                for ($dx = -1; $dx <= 1; $dx++) {
+                    $nx = $x + $dx;
+                    $ny = $y + $dy;
+                    if ($nx >= 0 && $nx < $w && $ny >= 0 && $ny < $h) {
+                        $rgb = imagecolorat($im, $nx, $ny);
+                        $r += ($rgb >> 16) & 0xFF;
+                        $g += ($rgb >> 8) & 0xFF;
+                        $b += $rgb & 0xFF;
+                        $count++;
+                    }
+                }
+            }
+            $r = round($r / $count);
+            $g = round($g / $count);
+            $b = round($b / $count);
+            $color = imagecolorallocate($smoothed, $r, $g, $b);
+            imagesetpixel($smoothed, $x, $y, $color);
+        }
+    }
+    return $smoothed;
+}
+$tiny = smooth_gd_image($tiny, $lqip_tiny_w, $lqip_tiny_h);
+
 ob_start();
 imagewebp($tiny, null, 30);
 $lqip_tiny_data = ob_get_clean();
+file_put_contents(__DIR__ . '/images/hero-lqip-' . $lqip_tiny_w . 'x' . $lqip_tiny_h . '.webp', $lqip_tiny_data);
 $lqip_tiny_base64 = base64_encode($lqip_tiny_data);
+$lqip_tiny_base64_length = strlen($lqip_tiny_base64);
 imagedestroy($tiny);
 
 // Generate or load LQIP-LCP image at target BPP
@@ -126,6 +159,7 @@ $lqip_lcp_url = 'images/hero.low-res.webp.php' . $delay;
     <ul>
       <li><strong>LQIP-LCP target size:</strong> <?= $target_size ?> bytes (0.055 BPP)</li>
       <li><strong>LQIP-LCP actual size:</strong> <?= file_exists($lqip_lcp_path) ? filesize($lqip_lcp_path) : '?' ?> bytes</li>
+      <li><strong>Tiny WebP base64 length:</strong> <?= $lqip_tiny_base64_length ?> chars</li>
       <li><strong>Display size:</strong> <?= $lqip_lcp_w ?>×<?= $lqip_lcp_h ?></li>
     </ul>
   </div>
