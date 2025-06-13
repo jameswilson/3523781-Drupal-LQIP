@@ -58,7 +58,8 @@ function build_url_without_delay() {
 $base_url = build_url_without_delay();
 ?>
 <header>
-  <nav aria-label="Main navigation">
+  <button id="nav-toggle" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+  <nav id="main-nav" aria-label="Main navigation">
     <?php foreach ($pages as $page): ?>
       <?php
         $link = $page['file'];
@@ -84,4 +85,14 @@ $base_url = build_url_without_delay();
     #}
     ?>
   </form>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var navToggle = document.getElementById('nav-toggle');
+    var mainNav = document.getElementById('main-nav');
+    navToggle.addEventListener('click', function() {
+      var isOpen = mainNav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+  </script>
 </header>
