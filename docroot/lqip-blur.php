@@ -6,7 +6,7 @@ $lqip_tiny_w = 16;
 $lqip_tiny_h = 9;
 $lqip_lcp_w = $display_w;
 $lqip_lcp_h = $display_h;
-$lqip_lcp_path = "images/hero-lqip-lcp-{$lqip_lcp_w}x{$lqip_lcp_h}.webp";
+$lqip_lcp_path = "images/hero.low-res.webp";
 $target_bpp = 0.055;
 $target_size = intval($lqip_lcp_w * $lqip_lcp_h * $target_bpp);
 
