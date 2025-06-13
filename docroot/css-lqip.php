@@ -174,7 +174,7 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
 </head>
 
 <body>
-  <?php $currentPage = 'css-lqip.php';
+  <?php $currentPage = basename(__FILE__);
   include 'includes/nav.php'; ?>
   <div class="hero-wrapper" style="--lqip:<?= $lqip_int ?>;">
     <img

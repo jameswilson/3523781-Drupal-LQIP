@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <?php $currentPage = 'index.php';
+  <?php $currentPage = basename(__FILE__);
   include 'includes/nav.php'; ?>
   <div class="container">
     <h1>LQIP/LCP Comparison Demo</h1>
