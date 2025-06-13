@@ -10,7 +10,7 @@ h1 {
   margin-top: 0;
 }
 a {
-  color: #0174e2;
+  color: #026acd;
 }
 ul li {
   margin: .5rem 0;
@@ -32,24 +32,29 @@ ul.demo-list a:hover {
   margin-top: 0.25rem;
 }
 header {
-  background: #d5f2ff;
+  background: #f3f5f8;
+  border-bottom: 1px solid #dde4e6;
   display: flex;
+  padding: 0 1rem;
   margin-bottom: 2rem;
-  display: flex;
   justify-content: center;
   align-items: center;
   gap: 2rem;
 }
+form {
+  padding: 1rem 0;
+}
 nav {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 0;
 }
 nav a {
   padding: 1rem;
   text-decoration: none;
   font-weight: normal;
-  color: #0174e2;
+  color: #026acd;
   position: relative;
   font-weight: bold;
 }
