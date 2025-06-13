@@ -59,6 +59,7 @@ $lqip_lcp_url = 'images/hero.low-res.webp.php' . $delay;
   <title>LQIP with Blur (2-level)</title>
   <link rel="stylesheet" href="styles/main.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼</text></svg>">
+  <meta name="description" content="This page demonstrates the two-level LQIP technique: a tiny blurred base64 placeholder, then a display-size LQIP-LCP image at 0.055 BPP, then the full-res image.">
   <style>
     .hero-wrapper {
       position: relative;
