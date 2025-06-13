@@ -112,7 +112,8 @@ $lqip_lcp_url = 'images/hero.low-res.webp.php' . $delay;
 </head>
 
 <body>
-  <?php $currentPage = 'lqip-blur.php'; include 'includes/nav.php'; ?>
+  <?php $currentPage = 'lqip-blur.php';
+  include 'includes/nav.php'; ?>
   <div class="hero-wrapper" style="height: auto; min-height: 300px; aspect-ratio: 16/9;">
     <img class="lqip-img" src="data:image/webp;base64,<?= $lqip_tiny_base64 ?>" alt="LQIP placeholder" />
     <img class="lcp-img" src="<?= $lqip_lcp_url ?>" width="<?= $lqip_lcp_w ?>" height="<?= $lqip_lcp_h ?>" alt="LQIP-LCP" onload="this.classList.add('loaded');this.previousElementSibling.classList.add('hide');" />

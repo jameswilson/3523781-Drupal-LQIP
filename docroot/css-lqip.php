@@ -52,7 +52,8 @@ function get_dominant_color_palette($image_path) {
   $img = @imagecreatefromjpeg($image_path);
   if (!$img) return ['red' => 204, 'green' => 204, 'blue' => 204];
   // Downscale to 16x16 for speed and robustness
-  $w = 16; $h = 16;
+  $w = 16;
+  $h = 16;
   $thumb = imagecreatetruecolor($w, $h);
   imagecopyresampled($thumb, $img, 0, 0, 0, 0, $w, $h, imagesx($img), imagesy($img));
   $hist = [];
@@ -137,6 +138,7 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -287,4 +289,5 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
     }
   </style>
 </body>
+
 </html>

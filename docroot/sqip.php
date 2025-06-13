@@ -7,20 +7,20 @@ $svg = file_exists($svg_path) ? file_get_contents($svg_path) : '';
 
 // Ensure SVG has width/height attributes
 if ($svg) {
-    if (!preg_match('/width="\d+"/', $svg) || !preg_match('/height="\d+"/', $svg)) {
-        $svg = preg_replace('/<svg(\s+)/', '<svg width="' . $display_w . '" height="' . $display_h . '"$1', $svg, 1);
-    }
+  if (!preg_match('/width="\d+"/', $svg) || !preg_match('/height="\d+"/', $svg)) {
+    $svg = preg_replace('/<svg(\s+)/', '<svg width="' . $display_w . '" height="' . $display_h . '"$1', $svg, 1);
+  }
 }
 
 // Optionally pad the SVG to test BPP threshold
 if (isset($_GET['pad']) && $svg) {
-    $target_bpp = 0.06;
-    $target_size = intval($display_w * $display_h * $target_bpp);
-    $current_size = strlen($svg);
-    if ($current_size < $target_size) {
-        $pad_len = $target_size - $current_size;
-        $svg = preg_replace('/<\/svg>/', "<!--" . str_repeat('X', $pad_len) . "--></svg>", $svg, 1);
-    }
+  $target_bpp = 0.06;
+  $target_size = intval($display_w * $display_h * $target_bpp);
+  $current_size = strlen($svg);
+  if ($current_size < $target_size) {
+    $pad_len = $target_size - $current_size;
+    $svg = preg_replace('/<\/svg>/', "<!--" . str_repeat('X', $pad_len) . "--></svg>", $svg, 1);
+  }
 }
 
 $svg_bytes = strlen($svg);
@@ -92,8 +92,10 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
     }
   </style>
 </head>
+
 <body>
-  <?php $currentPage = 'sqip.php'; include 'includes/nav.php'; ?>
+  <?php $currentPage = 'sqip.php';
+  include 'includes/nav.php'; ?>
   <div class="hero-wrapper">
     <div class="hero-sqip" id="sqip-placeholder">
       <?= $svg ?>
