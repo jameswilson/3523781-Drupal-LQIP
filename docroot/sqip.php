@@ -85,16 +85,6 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
     .hero-sqip.hide {
       opacity: 0;
     }
-
-    .bpp-warn {
-      color: #fff;
-      background: #f31f65;
-      padding: 0.3em 0.7em;
-      border-radius: 0.3em;
-      font-weight: bold;
-      display: inline-block;
-      margin-top: 0.5em;
-    }
   </style>
 </head>
 
@@ -124,7 +114,7 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
       <li><strong>BPP:</strong> <?= number_format($bpp, 4) ?> (minimum recommended: 0.055)</li>
     </ul>
     <?php if ($warn): ?>
-      <div class="bpp-warn">Warning: BPP is below 0.055. This SVG may not be considered a valid LCP candidate by Chrome.</div>
+      <div class="message message--warning">Warning: BPP is below 0.055. This SVG may not be considered a valid LCP candidate by Chrome.</div>
     <?php endif; ?>
     <p>
       <a href="?pad=1">Pad SVG to meet BPP threshold</a>
