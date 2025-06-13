@@ -51,28 +51,29 @@ function find_oklab_bits($targetL, $targetA, $targetB) {
 function get_dominant_color_palette($image_path) {
   $img = @imagecreatefromjpeg($image_path);
   if (!$img) return ['red' => 204, 'green' => 204, 'blue' => 204];
-  $w = imagesx($img);
-  $h = imagesy($img);
+  // Downscale to 16x16 for speed and robustness
+  $w = 16; $h = 16;
+  $thumb = imagecreatetruecolor($w, $h);
+  imagecopyresampled($thumb, $img, 0, 0, 0, 0, $w, $h, imagesx($img), imagesy($img));
   $hist = [];
-  $total = 0;
-  for ($y = 0; $y < $h; $y += max(1, intval($h / 32))) {
-    for ($x = 0; $x < $w; $x += max(1, intval($w / 32))) {
-      $index = imagecolorat($img, $x, $y);
-      $rgb = imagecolorsforindex($img, $index);
-      $key = ($rgb['red'] >> 4) . ',' . ($rgb['green'] >> 4) . ',' . ($rgb['blue'] >> 4);
+  for ($y = 0; $y < $h; $y++) {
+    for ($x = 0; $x < $w; $x++) {
+      $index = imagecolorat($thumb, $x, $y);
+      $rgb = imagecolorsforindex($thumb, $index);
+      $key = $rgb['red'] . ',' . $rgb['green'] . ',' . $rgb['blue'];
       if (!isset($hist[$key])) $hist[$key] = 0;
       $hist[$key]++;
-      $total++;
     }
   }
   arsort($hist);
   $top = key($hist);
   $parts = explode(',', $top);
   imagedestroy($img);
+  imagedestroy($thumb);
   return [
-    'red' => intval($parts[0]) << 4,
-    'green' => intval($parts[1]) << 4,
-    'blue' => intval($parts[2]) << 4
+    'red' => intval($parts[0]),
+    'green' => intval($parts[1]),
+    'blue' => intval($parts[2])
   ];
 }
 
