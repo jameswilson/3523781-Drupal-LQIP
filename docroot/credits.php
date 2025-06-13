@@ -15,6 +15,8 @@
   include 'includes/nav.php'; ?>
   <div class="container">
     <h1>Credits</h1>
+    <p>Discussion: <a href="https://www.drupal.org/i/3523781">Issue #3523781: Inline Low Quality Image Placeholders</a></p>
+    <p>Code: <a href="https://github.com/jameswilson/3523781-Drupal-LQIP">Drupal 11 LQIP demo on GitHub</a> by James Wilson.</p>
     <p><a href="https://unsplash.com/photos/low-angle-photo-of-beige-concrete-building-under-cloudy-sky-N2zk9yXjmLA">Hero image</a> by Anthony Esau on Unsplash.</p>
     <h2>Technique References</h2>
     <ul>
