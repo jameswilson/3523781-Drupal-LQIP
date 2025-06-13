@@ -18,12 +18,12 @@ $pages = [
   [
     'label' => 'LQIP No Blur',
     'file' => 'lqip-no-blur.php',
-    'desc' => 'Tiny (20x20) base64 inline WebP placeholder, swaps to full-res hero image (no blur).'
+    'desc' => 'A two-level LQIP technique: a tiny base64 placeholder, then a display-size LQIP-LCP image at 0.055 BPP, then the full-res image.'
   ],
   [
     'label' => 'LQIP with Blur',
     'file' => 'lqip-blur.php',
-    'desc' => 'Tiny (20x20) base64 inline WebP placeholder, swaps to full-res hero image, with CSS blur on placeholder.'
+    'desc' => 'A two-level LQIP technique: a tiny base64 placeholder, then a display-size LQIP-LCP image at 0.055 BPP, then the full-res image, with CSS blur on placeholder.'
   ],
   [
     'label' => 'SQIP',
