@@ -4,7 +4,7 @@ $delay = isset($_GET['delay']) ? ('?delay=' . intval($_GET['delay'])) : '';
 $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">

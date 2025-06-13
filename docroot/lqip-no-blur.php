@@ -49,7 +49,7 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
 $lqip_lcp_url = 'images/hero.low-res.webp.php' . $delay;
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
