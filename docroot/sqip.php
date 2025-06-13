@@ -1,6 +1,5 @@
 <?php
-$src = 'images/hero.jpg';
-$hero_url = $src . '?' . time();
+$src = 'images/hero.hi-res.jpg';
 $svg_path = 'images/hero.sqip-128.svg';
 $display_w = 1200;
 $display_h = 675;
@@ -27,6 +26,9 @@ if (isset($_GET['pad']) && $svg) {
 $svg_bytes = strlen($svg);
 $bpp = $svg_bytes / ($display_w * $display_h);
 $warn = $bpp < 0.055;
+// Pass through simulated image latency from GET param if present.
+$delay = isset($_GET['delay']) ? ('?delay=' . intval($_GET['delay'])) : '';
+$hero_url = 'images/hero.hi-res.jpg.php' . $delay;
 ?>
 <!DOCTYPE html>
 <html>

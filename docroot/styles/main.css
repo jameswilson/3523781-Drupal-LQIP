@@ -31,9 +31,16 @@ ul.demo-list a:hover {
   font-size: 1rem;
   margin-top: 0.25rem;
 }
-nav {
+header {
   background: #d5f2ff;
+  display: flex;
   margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+nav {
   display: flex;
   justify-content: center;
   gap: 0;

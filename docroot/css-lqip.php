@@ -1,6 +1,5 @@
 <?php
-$src = 'images/hero.jpg';
-$hero_url = $src . '?' . time();
+$src = 'images/hero.hi-res.jpg';
 
 function get_dominant_color($image_path) {
   $img = @imagecreatefromjpeg($image_path);
@@ -17,7 +16,8 @@ function get_dominant_color($image_path) {
 function get_lqip_int($image_path) {
   $img = @imagecreatefromjpeg($image_path);
   if (!$img) return 0;
-  $w = 3; $h = 2;
+  $w = 3;
+  $h = 2;
   $thumb = imagecreatetruecolor($w, $h);
   imagecopyresampled($thumb, $img, 0, 0, 0, 0, $w, $h, imagesx($img), imagesy($img));
   $brightness = [];
@@ -42,7 +42,7 @@ function get_lqip_int($image_path) {
   // Pack brightness (6x2 bits = 12 bits)
   $brightness_bits = 0;
   for ($i = 0; $i < 6; $i++) {
-    $brightness_bits |= ($brightness[$i] & 0x3) << (10 - $i*2);
+    $brightness_bits |= ($brightness[$i] & 0x3) << (10 - $i * 2);
   }
   // Final packed int: [12 bits brightness][8 bits color]
   $packed = ($brightness_bits << 8) | $base_color;
@@ -54,6 +54,10 @@ function get_lqip_int($image_path) {
 $dominant_color = get_dominant_color($src);
 $dominant_hex = sprintf("#%02x%02x%02x", $dominant_color['red'], $dominant_color['green'], $dominant_color['blue']);
 $lqip_int = get_lqip_int($src);
+
+// Pass through simulated image latency from GET param if present.
+$delay = isset($_GET['delay']) ? ('?delay=' . intval($_GET['delay'])) : '';
+$hero_url = 'images/hero.hi-res.jpg.php' . $delay;
 ?>
 <!DOCTYPE html>
 <html>

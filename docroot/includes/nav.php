@@ -41,9 +41,47 @@ $pages = [
     'desc' => 'Credits and references.'
   ]
 ];
+
+// Get current delay (ms) from GET param, default 0
+$current_delay = isset($_GET['delay']) ? intval($_GET['delay']) : 0;
+$delay_options = [0, 1000, 1500, 2000, 2500, 3000, 5000, 15000, 30000];
+$delay_labels = ['0s', '1s', '1.5s', '2s', '2.5s', '3s', '5s', '15s', '30s'];
+
+// Build current URL without delay param
+function build_url_without_delay() {
+  $params = $_GET;
+  unset($params['delay']);
+  $query = http_build_query($params);
+  $base = basename($_SERVER['PHP_SELF']);
+  return $base . ($query ? ('?' . $query) : '');
+}
+$base_url = build_url_without_delay();
 ?>
-<nav>
-  <?php foreach ($pages as $page): ?>
-    <a href="<?= $page['file'] ?>" <?= (isset($currentPage) && $currentPage === $page['file']) ? ' class="active"' : '' ?>><?= $page['label'] ?></a>
-  <?php endforeach; ?>
-</nav>
+<header>
+  <nav aria-label="Main navigation">
+    <?php foreach ($pages as $page): ?>
+      <?php
+        $link = $page['file'];
+        if ($current_delay > 0) {
+          $link .= (strpos($link, '?') === false ? '?' : '&') . 'delay=' . $current_delay;
+        }
+      ?>
+      <a href="<?= htmlspecialchars($link) ?>" <?= (isset($currentPage) && $currentPage === $page['file']) ? ' class="active"' : '' ?>><?= $page['label'] ?></a>
+    <?php endforeach; ?>
+  </nav>
+  <form id="delay-form" method="get" action="<?= htmlspecialchars($base_url) ?>" style="margin:0;">
+    <label for="delay-select" style="font-weight:normal;font-size:0.95em;">Delay:</label>
+    <select name="delay" id="delay-select" onchange="this.form.submit()" style="margin-left:0.5em;">
+      <?php foreach ($delay_options as $i => $val): ?>
+        <option value="<?= $val ?>" <?= ($current_delay == $val) ? 'selected' : '' ?>><?= $delay_labels[$i] ?></option>
+      <?php endforeach; ?>
+    </select>
+    <?php
+    // Preserve other GET params as hidden fields
+    #foreach ($_GET as $k => $v) {
+    #  if ($k === 'delay') continue;
+    #  echo '<input type="hidden" name="' . htmlspecialchars($k) . '" value="' . htmlspecialchars($v) . '">';
+    #}
+    ?>
+  </form>
+</header>

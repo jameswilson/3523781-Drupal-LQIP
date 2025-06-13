@@ -1,5 +1,5 @@
 <?php
-$src = 'images/hero.jpg';
+$src = 'images/hero.hi-res.jpg';
 $display_w = 1200;
 $display_h = 675;
 $lqip_tiny_w = 20;
@@ -43,9 +43,10 @@ if (!file_exists($lqip_lcp_path)) {
   file_put_contents($lqip_lcp_path, $best_data);
   imagedestroy($lcp);
 }
-$lqip_lcp_url = $lqip_lcp_path . '?' . filemtime($lqip_lcp_path);
-imagedestroy($im);
-$hero_url = $src . '?' . time();
+// Pass through simulated image latency from GET param if present.
+$delay = isset($_GET['delay']) ? ('?delay=' . intval($_GET['delay'])) : '';
+$hero_url = 'images/hero.hi-res.jpg.php' . $delay;
+$lqip_lcp_url = 'images/hero.low-res.webp.php' . $delay;
 ?>
 <!DOCTYPE html>
 <html>

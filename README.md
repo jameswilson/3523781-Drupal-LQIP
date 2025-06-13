@@ -40,7 +40,7 @@ docroot/
   styles/
     main.css
   images/
-    hero.jpg
+    hero.hi-res.jpg
     hero.sqip.svg
 ```
 
@@ -54,7 +54,7 @@ To generate the SQIP SVG placeholder, use the following commands:
 
 ```sh
 npm install -g sqip-cli@canary
-sqip -i docroot/images/hero.jpg -o docroot/images/hero.sqip.svg
+sqip -i docroot/images/hero.hi-res.jpg -o docroot/images/hero.sqip.svg
 ```
 
 This will create an SVG placeholder from the hero JPG for use in the SQIP demo page.
@@ -68,7 +68,7 @@ This will create an SVG placeholder from the hero JPG for use in the SQIP demo p
 ## Usage
 
 1. Place the project files in your web server's document root.
-2. Ensure the `images/hero.jpg` and `.svg` files are present.
+2. Ensure the `images/hero.hi-res.jpg` and `.svg` files are present.
 3. Open `index.php` in your browser to start exploring the different LQIP techniques.
 4. Use Lighthouse or WebPageTest to measure LCP and compare the results across techniques.
 

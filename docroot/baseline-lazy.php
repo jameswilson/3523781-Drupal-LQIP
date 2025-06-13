@@ -1,4 +1,8 @@
-<?php $hero_url = 'images/hero.jpg?' . time(); ?>
+<?php
+// Pass through simulated image latency from GET param if present.
+$delay = isset($_GET['delay']) ? ('?delay=' . intval($_GET['delay'])) : '';
+$hero_url = 'images/hero.hi-res.jpg.php' . $delay;
+?>
 <!DOCTYPE html>
 <html>
 <head>
