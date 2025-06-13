@@ -31,6 +31,9 @@
       <li>
         <a href="https://css-tricks.com/the-blur-up-technique-for-loading-background-images/" target="_blank" rel="noopener">CSS-Tricks: The Blur Up Technique</a>
       </li>
+      <li>
+        <a href="https://csswizardry.com/2023/09/the-ultimate-lqip-lcp-technique/" target="_blank" rel="noopener">CSS Wizardry: The Ultimate LQIP/LCP Technique</a>
+      </li>
     </ul>
   </div>
 </body>
