@@ -52,6 +52,8 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
 
     .hero-sqip {
       width: 100%;
+      max-width: 100%;
+      height: auto;
       display: block;
       position: absolute;
       top: 0;
@@ -67,6 +69,8 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
 
     .hero-full {
       width: 100%;
+      max-width: 100%;
+      height: auto;
       display: block;
       opacity: 0;
       transition: opacity 0.5s;
