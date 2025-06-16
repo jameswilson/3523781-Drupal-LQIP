@@ -109,7 +109,8 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
       transition: opacity 0.5s;
       background-size: cover;
       background-position: center;
-      image-rendering: smooth; /* or auto, or high-quality */
+      image-rendering: smooth;
+      /* or auto, or high-quality */
     }
   </style>
 </head>
@@ -126,7 +127,7 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
     <ul>
       <li><strong>Bitmap size:</strong> 8×8</li>
       <li><strong>Bitmap base64 length:</strong> <?= strlen($lqip_base64) ?> chars</li>
-      <li><strong>Average color:</strong> <?= $avg_color ?></li>
+      <li><strong>Average color:</strong> <span style="background:<?= $avg_color ?>;padding-left:1em;border-radius:0.3em;"></span>&nbsp;<kbd><?= $avg_color ?></kbd></li>
       <li><strong>Display size:</strong> <?= $display_w ?>×<?= $display_h ?></li>
     </ul>
   </div>

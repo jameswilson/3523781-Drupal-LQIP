@@ -1,14 +1,11 @@
 <?php
-// Pass through simulated image latency from GET param if present.
-$delay = isset($_GET['delay']) ? ('?delay=' . intval($_GET['delay'])) : '';
-$hero_url = 'images/hero.hi-res.jpg.php' . $delay;
 $src = 'images/hero.hi-res.jpg';
 $display_w = 1200;
 $display_h = 675;
 $lqip_w = 8;
 $lqip_h = 8;
 
-// Generate tiny 8x8 PNG and compute average color
+// Generate tiny base64 LQIP
 $hq = @imagecreatefromjpeg($src);
 if (!$hq) {
   die('Source image not found.');
@@ -16,7 +13,7 @@ if (!$hq) {
 $lq = imagecreatetruecolor($lqip_w, $lqip_h);
 imagecopyresampled($lq, $hq, 0, 0, 0, 0, $lqip_w, $lqip_h, imagesx($hq), imagesy($hq));
 
-// Apply a simple box blur to the 8x8 bitmap
+// Apply a simple box blur to the tiny image
 function smooth_gd_image($hq, $w, $h) {
   $smoothed = imagecreatetruecolor($w, $h);
   for ($y = 0; $y < $h; $y++) {
@@ -67,16 +64,15 @@ $avg_color = sprintf('#%02x%02x%02x', $avg_r, $avg_g, $avg_b);
 
 // Output 8x8 PNG as base64
 ob_start();
-imagepng($lq);
+imagewebp($lq, null, 30);
 $lqip_data = ob_get_clean();
 $lqip_base64 = base64_encode($lqip_data);
 $lqip_base64_length = strlen($lqip_base64);
 
-// Store the PNG file in the images folder
-file_put_contents(__DIR__ . '/images/hero-lqip-' . $lqip_w . 'x' . $lqip_h . '.png', $lqip_data);
+// Store the WebP file in the images folder
+file_put_contents(__DIR__ . '/images/hero-lqip-' . $lqip_w . 'x' . $lqip_h . '.webp', $lqip_data);
 
 imagedestroy($lq);
-imagedestroy($hq);
 
 // Pass through simulated image latency from GET param if present.
 $delay = isset($_GET['delay']) ? ('?delay=' . intval($_GET['delay'])) : '';
@@ -88,10 +84,10 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LQIP PNG (inline background)</title>
+  <title>LQIP WebP (inline, smooth)</title>
   <link rel="stylesheet" href="styles/main.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼</text></svg>">
-  <meta name="description" content="This page demonstrates a simple LQIP technique: a tiny 8x8 inline PNG as a background-image, then the full-res image.">
+  <meta name="description" content="This page demonstrates a simple LQIP technique: a tiny 8x8 inline WebP as a background-image on the wrapper, then loads the full-res image with a smooth fade-in.">
   <style>
     .hero-wrapper {
       position: relative;
@@ -110,10 +106,6 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
       top: 0;
       left: 0;
       transition: opacity 0.5s;
-      background-size: cover;
-      background-position: center;
-      image-rendering: smooth;
-      /* or auto, or high-quality */
     }
   </style>
 </head>
@@ -121,12 +113,12 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
 <body>
   <?php $currentPage = basename(__FILE__);
   include 'includes/nav.php'; ?>
-  <div class="hero-wrapper" style="height: auto; min-height: 300px; aspect-ratio: 16/9;">
-    <img class="hero-img" src="<?= $hero_url ?>" width="<?= $display_w ?>" height="<?= $display_h ?>" alt="Hero" loading="eager" style="background-image: url('data:image/png;base64,<?= $lqip_base64 ?>'); background-size: cover; background-position: center; background-color: <?= $avg_color ?>;" />
+  <div class="hero-wrapper" style="height: auto; min-height: 300px; aspect-ratio: 16/9; background-image: url('data:image/png;base64,<?= $lqip_base64 ?>'); background-size: cover; background-position: center; background-color: <?= $avg_color ?>;">
+    <img class="hero-img" src="<?= $hero_url ?>" width="<?= $display_w ?>" height="<?= $display_h ?>" alt="Hero" loading="eager" style="opacity: 0;" onload="this.style.opacity=1" />
   </div>
-  <div class="container">
-    <h1>LQIP PNG (inline background)</h1>
-    <p>This page demonstrates a simple LQIP technique: a tiny 8x8 inline PNG as a background-image, then the full-res image.</p>
+  <div class=" container">
+    <h1>LQIP WebP (inline, smooth)</h1>
+    <p>This page demonstrates a simple LQIP technique: a tiny 8x8 inline WebP as a background-image on the wrapper, then loads the full-res image with a smooth fade-in.</p>
     <ul>
       <li><strong>LQIP size:</strong> <?= $lqip_w ?>×<?= $lqip_h ?></li>
       <li><strong>LQIP base64 length:</strong> <?= $lqip_base64_length ?> chars</li>

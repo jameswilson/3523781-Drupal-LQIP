@@ -1,6 +1,8 @@
 <?php
 $src = 'images/hero.hi-res.jpg';
-$svg_path = 'images/hero.sqip-128.svg';
+$svg_path = 'images/hero.sqip.svg';
+// $svg_path = 'images/hero.sqip-64.svg';
+// $svg_path = 'images/hero.sqip-128.svg';
 $display_w = 1200;
 $display_h = 675;
 $svg = file_exists($svg_path) ? file_get_contents($svg_path) : '';

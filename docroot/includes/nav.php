@@ -16,16 +16,6 @@ $pages = [
     'desc' => 'JPG hero image with <code>loading="eager"</code>.'
   ],
   [
-    'label' => 'LQIP No Blur',
-    'file' => 'lqip-no-blur.php',
-    'desc' => 'A two-level LQIP technique: a tiny base64 placeholder, then a display-size LQIP-LCP image at 0.055 BPP, then the full-res image.'
-  ],
-  [
-    'label' => 'LQIP with Blur',
-    'file' => 'lqip-blur.php',
-    'desc' => 'A two-level LQIP technique: a tiny base64 placeholder, then a display-size LQIP-LCP image at 0.055 BPP, then the full-res image, with CSS blur on placeholder.'
-  ],
-  [
     'label' => 'LQIP BMP',
     'file' => 'lqip-bmp.php',
     'desc' => 'A simple LQIP technique: a tiny 8x8 BMP bitmap as a background-image, then the full-res image.'
@@ -40,6 +30,21 @@ $pages = [
     'file' => 'lqip-webp.php',
     'desc' => 'A simple LQIP technique: a tiny 8x8 WEBP bitmap as a background-image, then the full-res image.'
   ],
+  [
+    'label' => 'LQIP WebP (smooth)',
+    'file' => 'lqip-webp-smooth.php',
+    'desc' => 'A simple LQIP technique: a tiny 8x8 inline WebP as a background-image on the wrapper, then fade-in to the full-res image.'
+  ],
+  [
+    'label' => 'Ultimate LQIP',
+    'file' => 'lqip-ultimate.php',
+    'desc' => 'The “Ultimate LCP Technique” from <a href="https://csswizardry.com/2023/09/the-ultimate-lqip-lcp-technique/">Harry Roberts</a>: a two-level LQIP technique: a tiny base64 placeholder, then a display-size LQIP-LCP image at 0.055 BPP, then the full-res image.'
+  ],
+  // [
+  //   'label' => 'Ultimate LQIP with Blur',
+  //   'file' => 'lqip-ultimate-blur.php',
+  //   'desc' => 'The “Ultimate LCP Technique” from <a href="https://csswizardry.com/2023/09/the-ultimate-lqip-lcp-technique/">Harry Roberts</a>: a two-level LQIP technique: a tiny base64 placeholder, then a display-size LQIP-LCP image at 0.055 BPP, then the full-res image.'
+  // ],
   [
     'label' => 'BlurHash',
     'file' => 'blurhash.php',

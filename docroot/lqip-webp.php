@@ -122,7 +122,7 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
     <ul>
       <li><strong>LQIP size:</strong> <?= $lqip_w ?>×<?= $lqip_h ?></li>
       <li><strong>LQIP base64 length:</strong> <?= $lqip_base64_length ?> chars</li>
-      <li><strong>Average color:</strong> <?= $avg_color ?></li>
+      <li><strong>Average color:</strong> <span style="background:<?= $avg_color ?>;padding-left:1em;border-radius:0.3em;"></span>&nbsp;<kbd><?= $avg_color ?></kbd></li>
       <li><strong>Display size:</strong> <?= $display_w ?>×<?= $display_h ?></li>
     </ul>
   </div>

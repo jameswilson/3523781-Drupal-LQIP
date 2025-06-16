@@ -2,8 +2,8 @@
 $src = 'images/hero.hi-res.jpg';
 $display_w = 1200;
 $display_h = 675;
-$lqip_tiny_w = 16;
-$lqip_tiny_h = 9;
+$lqip_tiny_w = 8;
+$lqip_tiny_h = 8;
 $lqip_lcp_w = $display_w;
 $lqip_lcp_h = $display_h;
 $lqip_lcp_path = "images/hero.low-res.webp";
@@ -17,31 +17,31 @@ imagecopyresampled($tiny, $im, 0, 0, 0, 0, $lqip_tiny_w, $lqip_tiny_h, imagesx($
 
 // Apply a simple box blur to the tiny image
 function smooth_gd_image($im, $w, $h) {
-    $smoothed = imagecreatetruecolor($w, $h);
-    for ($y = 0; $y < $h; $y++) {
-        for ($x = 0; $x < $w; $x++) {
-            $r = $g = $b = $count = 0;
-            for ($dy = -1; $dy <= 1; $dy++) {
-                for ($dx = -1; $dx <= 1; $dx++) {
-                    $nx = $x + $dx;
-                    $ny = $y + $dy;
-                    if ($nx >= 0 && $nx < $w && $ny >= 0 && $ny < $h) {
-                        $rgb = imagecolorat($im, $nx, $ny);
-                        $r += ($rgb >> 16) & 0xFF;
-                        $g += ($rgb >> 8) & 0xFF;
-                        $b += $rgb & 0xFF;
-                        $count++;
-                    }
-                }
-            }
-            $r = round($r / $count);
-            $g = round($g / $count);
-            $b = round($b / $count);
-            $color = imagecolorallocate($smoothed, $r, $g, $b);
-            imagesetpixel($smoothed, $x, $y, $color);
+  $smoothed = imagecreatetruecolor($w, $h);
+  for ($y = 0; $y < $h; $y++) {
+    for ($x = 0; $x < $w; $x++) {
+      $r = $g = $b = $count = 0;
+      for ($dy = -1; $dy <= 1; $dy++) {
+        for ($dx = -1; $dx <= 1; $dx++) {
+          $nx = $x + $dx;
+          $ny = $y + $dy;
+          if ($nx >= 0 && $nx < $w && $ny >= 0 && $ny < $h) {
+            $rgb = imagecolorat($im, $nx, $ny);
+            $r += ($rgb >> 16) & 0xFF;
+            $g += ($rgb >> 8) & 0xFF;
+            $b += $rgb & 0xFF;
+            $count++;
+          }
         }
+      }
+      $r = round($r / $count);
+      $g = round($g / $count);
+      $b = round($b / $count);
+      $color = imagecolorallocate($smoothed, $r, $g, $b);
+      imagesetpixel($smoothed, $x, $y, $color);
     }
-    return $smoothed;
+  }
+  return $smoothed;
 }
 $tiny = smooth_gd_image($tiny, $lqip_tiny_w, $lqip_tiny_h);
 
@@ -76,8 +76,6 @@ if (!file_exists($lqip_lcp_path)) {
   file_put_contents($lqip_lcp_path, $best_data);
   imagedestroy($lcp);
 }
-imagedestroy($im);
-
 // Pass through simulated image latency from GET param if present.
 $delay = isset($_GET['delay']) ? ('?delay=' . intval($_GET['delay'])) : '';
 $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
@@ -89,10 +87,10 @@ $lqip_lcp_url = 'images/hero.low-res.webp.php' . $delay;
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LQIP with Blur (2-level)</title>
+  <title>Ultimate LQIP</title>
   <link rel="stylesheet" href="styles/main.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼</text></svg>">
-  <meta name="description" content="This page demonstrates the two-level LQIP technique: a tiny blurred base64 placeholder, then a display-size LQIP-LCP image at 0.055 BPP, then the full-res image.">
+  <meta name="description" content="This page demonstrates the two-level LQIP technique: a tiny base64 placeholder, then a display-size LQIP-LCP image at 0.055 BPP, then the full-res image.">
   <style>
     .hero-wrapper {
       position: relative;
@@ -118,7 +116,6 @@ $lqip_lcp_url = 'images/hero.low-res.webp.php' . $delay;
     .lqip-img {
       z-index: 1;
       opacity: 1;
-      filter: blur(20px);
     }
 
     .lcp-img {
@@ -154,8 +151,8 @@ $lqip_lcp_url = 'images/hero.low-res.webp.php' . $delay;
     <img class="hero-img" src="<?= $hero_url ?>" width="<?= $lqip_lcp_w ?>" height="<?= $lqip_lcp_h ?>" alt="Hero" loading="eager" onload="this.classList.add('loaded');this.previousElementSibling.classList.add('hide');" />
   </div>
   <div class="container">
-    <h1>LQIP with Blur (2-level)</h1>
-    <p>This page demonstrates the two-level LQIP technique: a tiny blurred base64 placeholder, then a display-size LQIP-LCP image at 0.055 BPP, then the full-res image.</p>
+    <h1>The Ultimate LQIP technique</h1>
+    <p>This page demonstrates the two-level LQIP technique from <a href="https://csswizardry.com/2023/09/the-ultimate-lqip-lcp-technique/">Harry Roberts</a>: a tiny blurred base64 placeholder, then a display-size LQIP image at 0.055 BPP to satisfy LCP, then the full-res image.</p>
     <ul>
       <li><strong>LQIP-LCP target size:</strong> <?= $target_size ?> bytes (0.055 BPP)</li>
       <li><strong>LQIP-LCP actual size:</strong> <?= file_exists($lqip_lcp_path) ? filesize($lqip_lcp_path) : '?' ?> bytes</li>
