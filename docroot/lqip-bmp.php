@@ -119,7 +119,7 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
   <?php $currentPage = basename(__FILE__);
   include 'includes/nav.php'; ?>
   <div class="hero-wrapper" style="height: auto; min-height: 300px; aspect-ratio: 16/9;">
-    <img class="hero-img" src="<?= $hero_url ?>" width="<?= $display_w ?>" height="<?= $display_h ?>" alt="Hero" loading="eager" onload="this.classList.add('loaded');this.previousElementSibling.classList.add('hide');" style="background-image: url('data:image/bmp;base64,<?= $lqip_base64 ?>'); background-size: cover; background-position: center; background-color: <?= $avg_color ?>;" />
+    <img class="hero-img" src="<?= $hero_url ?>" width="<?= $display_w ?>" height="<?= $display_h ?>" alt="Hero" loading="eager" style="background-image: url('data:image/bmp;base64,<?= $lqip_base64 ?>'); background-size: cover; background-position: center; background-color: <?= $avg_color ?>;" />
   </div>
   <div class="container">
     <h1>LQIP with BMP Bitmap (inline background)</h1>
