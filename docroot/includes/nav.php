@@ -61,6 +61,11 @@ $pages = [
     'desc' => 'Pure CSS LQIP: dominant color or gradient as background, hero image fades in on top of a blurry CSS placeholder. Inspired by <a href="https://leanrada.com/notes/css-only-lqip/" target="_blank" rel="noopener">leanrada.com</a>.'
   ],
   [
+    'label' => 'Results',
+    'file' => 'results.php',
+    'desc' => 'Lighthouse results for all pages.'
+  ],
+  [
     'label' => 'Credits',
     'file' => 'credits.php',
     'desc' => 'Credits and references.'

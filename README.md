@@ -77,6 +77,10 @@ This will create an SVG placeholder from the hero JPG for use in the SQIP demo p
 3. Open `index.php` in your browser to start exploring the different LQIP techniques.
 4. Use Lighthouse or WebPageTest to measure LCP and compare the results across techniques.
 
+        cd test
+        npm install
+        npm run audit
+
 ## Credits
 
 Photo by <a href="https://unsplash.com/@anthonyesau">Anthony Esau</a> on <a href="https://unsplash.com/photos/low-angle-photo-of-beige-concrete-building-under-cloudy-sky-N2zk9yXjmLA">Unsplash</a>

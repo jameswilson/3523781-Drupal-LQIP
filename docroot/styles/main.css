@@ -92,6 +92,51 @@ code {
   font-weight: normal;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+
+tbody tr:not(:last-child) td,
+tbody tr:not(:last-child) th {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  background: #f9fafb;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+thead th a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+th.sorted {
+  position: relative;
+}
+
+th.sorted::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: currentColor;
+  height: 2px;
+}
+
 .container {
   max-width: 42rem;
   margin: 2rem auto;

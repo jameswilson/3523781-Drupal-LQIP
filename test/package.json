@@ -1,0 +1,13 @@
+{
+  "name": "drupal-lqip-lighthouse",
+  "version": "1.0.0",
+  "description": "Lighthouse audit runner for Drupal LQIP demo site.",
+  "main": "run-lighthouse.mjs",
+  "scripts": {
+    "audit": "node run-lighthouse.mjs"
+  },
+  "dependencies": {
+    "lighthouse": "^11.0.0",
+    "chrome-launcher": "^0.15.0"
+  }
+}
