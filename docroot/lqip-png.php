@@ -92,37 +92,26 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
   <link rel="stylesheet" href="styles/main.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼</text></svg>">
   <meta name="description" content="This page demonstrates a simple LQIP technique: a tiny 8x8 inline PNG as a background-image, then the full-res image.">
-  <style>
-    .hero-wrapper {
-      position: relative;
-      width: 100vw;
-      max-width: 1200px;
-      margin: 0 auto;
-      overflow: hidden;
-      aspect-ratio: 16/9;
-    }
-
-    .hero-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transition: opacity 0.5s;
-      background-size: cover;
-      background-position: center;
-      image-rendering: smooth;
-      /* or auto, or high-quality */
-    }
-  </style>
 </head>
 
 <body>
   <?php $currentPage = basename(__FILE__);
   include 'includes/nav.php'; ?>
-  <div class="hero-wrapper" style="height: auto; min-height: 300px; aspect-ratio: 16/9;">
-    <img class="hero-img" src="<?= $hero_url ?>" width="<?= $display_w ?>" height="<?= $display_h ?>" alt="Hero" loading="eager" style="background-image: url('data:image/png;base64,<?= $lqip_base64 ?>'); background-size: cover; background-position: center; background-color: <?= $avg_color ?>;" />
+  <div class="hero-wrapper hero-wrapper--lqip-png">
+    <img
+      class="hero-hi-res hero-hi-res--lqip-png"
+      src="<?= $hero_url ?>"
+      width="<?= $display_w ?>"
+      height="<?= $display_h ?>"
+      alt="Hero"
+      loading="eager"
+      style="
+        background-image: url('data:image/png;base64,<?= $lqip_base64 ?>');
+        background-size: cover;
+        background-position: center;
+        background-color: <?= $avg_color ?>;
+      "
+    />
   </div>
   <div class="container">
     <h1>LQIP PNG (inline background)</h1>

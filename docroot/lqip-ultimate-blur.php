@@ -95,65 +95,34 @@ $lqip_lcp_url = 'images/hero.low-res.webp.php' . $delay;
   <link rel="stylesheet" href="styles/main.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼</text></svg>">
   <meta name="description" content="This page demonstrates the two-level LQIP technique: a tiny blurred base64 placeholder, then a display-size LQIP-LCP image at 0.055 BPP, then the full-res image.">
-  <style>
-    .hero-wrapper {
-      position: relative;
-      width: 100vw;
-      max-width: 1200px;
-      margin: 0 auto;
-      overflow: hidden;
-      aspect-ratio: 16/9;
-    }
-
-    .lqip-img,
-    .lcp-img,
-    .hero-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transition: opacity 0.5s;
-    }
-
-    .lqip-img {
-      z-index: 1;
-      opacity: 1;
-      filter: blur(20px);
-    }
-
-    .lcp-img {
-      z-index: 2;
-      opacity: 0;
-    }
-
-    .hero-img {
-      z-index: 3;
-      opacity: 0;
-    }
-
-    .lcp-img.loaded {
-      opacity: 1;
-    }
-
-    .hero-img.loaded {
-      opacity: 1;
-    }
-
-    .lqip-img.hide {
-      opacity: 0;
-    }
-  </style>
 </head>
 
 <body>
   <?php $currentPage = basename(__FILE__);
   include 'includes/nav.php'; ?>
-  <div class="hero-wrapper" style="height: auto; min-height: 300px; aspect-ratio: 16/9;">
-    <img class="lqip-img" src="data:image/webp;base64,<?= $lqip_tiny_base64 ?>" alt="LQIP placeholder" />
-    <img class="lcp-img" src="<?= $lqip_lcp_url ?>" width="<?= $lqip_lcp_w ?>" height="<?= $lqip_lcp_h ?>" alt="LQIP-LCP" onload="this.classList.add('loaded');this.previousElementSibling.classList.add('hide');" />
-    <img class="hero-img" src="<?= $hero_url ?>" width="<?= $lqip_lcp_w ?>" height="<?= $lqip_lcp_h ?>" alt="Hero" loading="eager" onload="this.classList.add('loaded');this.previousElementSibling.classList.add('hide');" />
+  <div class="hero-wrapper hero-wrapper--lqip-ultimate">
+    <img
+      class="hero-placeholder hero-placeholder--lqip-ultimate blur-12px"
+      alt=""
+      width="<?= $display_w ?>"
+      height="<?= $display_w ?>"
+      src="data:image/webp;base64,<?= $lqip_tiny_base64 ?>" />
+    <img
+      class="hero-lo-res hero-lo-res--lqip-ultimate fade-in blur-12px"
+      alt=""
+      loading="eager"
+      width="<?= $lqip_lcp_w ?>"
+      height="<?= $lqip_lcp_h ?>"
+      src="<?= $lqip_lcp_url ?>"
+      onload="this.classList.add('loaded');" />
+    <img
+      class="hero-hi-res hero-hi-res--lqip-ultimate fade-in"
+      alt="Hero"
+      loading="eager"
+      width="<?= $display_w ?>"
+      height="<?= $display_w ?>"
+      src="<?= $hero_url ?>"
+      onload="this.classList.add('loaded');" />
   </div>
   <div class="container">
     <h1>The Ultimate LQIP technique with Blur</h1>

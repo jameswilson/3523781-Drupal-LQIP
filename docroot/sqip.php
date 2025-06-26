@@ -42,69 +42,24 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
   <link rel="stylesheet" href="styles/main.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼</text></svg>">
   <meta name="description" content="This page demonstrates an inline SQIP SVG placeholder, swapped for the full-res hero image.">
-  <style>
-    .hero-wrapper {
-      position: relative;
-      width: 100vw;
-      max-width: 1200px;
-      margin: 0 auto;
-      overflow: hidden;
-      aspect-ratio: 16/9;
-    }
-
-    .hero-sqip {
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
-      transition: opacity 0.5s;
-    }
-
-    .hero-sqip svg {
-      width: 100%;
-      height: auto;
-    }
-
-    .hero-full {
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      display: block;
-      opacity: 0;
-      transition: opacity 0.5s;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-full.loaded {
-      opacity: 1;
-    }
-
-    .hero-sqip.hide {
-      opacity: 0;
-    }
-  </style>
 </head>
 
 <body>
   <?php $currentPage = basename(__FILE__);
   include 'includes/nav.php'; ?>
-  <div class="hero-wrapper">
-    <div class="hero-sqip" id="sqip-placeholder">
+  <div class="hero-wrapper hero-wrapper--sqip">
+    <div class="hero-placeholder hero-placeholder--sqip">
       <?= $svg ?>
     </div>
     <img
-      class="hero-full"
+      class="hero-hi-res hero-hi-res--sqip fade-in"
       width="<?= $display_w ?>"
       height="<?= $display_h ?>"
       src="<?= $hero_url ?>"
       alt="Hero"
       loading="eager"
-      onload="this.classList.add('loaded');document.getElementById('sqip-placeholder').classList.add('hide');" />
+      onload="this.classList.add('loaded');"
+    />
   </div>
   <div class="container">
     <h1>SQIP Placeholder</h1>

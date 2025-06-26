@@ -49,64 +49,28 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
   <link rel="stylesheet" href="styles/main.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼</text></svg>">
   <meta name="description" content="This page demonstrates a BlurHash LQIP technique using the php-blurhash library.">
-  <style>
-    .hero-wrapper {
-      width: 100vw;
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 16/9;
-    }
-
-    .hero-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 0.7s;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    .hero-img.loaded {
-      opacity: 1;
-    }
-
-    .blurhash-canvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
-      background: #eee;
-    }
-  </style>
 </head>
 
 <body>
   <?php $currentPage = basename(__FILE__);
   include 'includes/nav.php'; ?>
-  <div class="hero-wrapper">
+  <div class="hero-wrapper hero-wrapper--blurhash">
     <canvas
-      class="blurhash-canvas"
-      id="blurhash-canvas"
+      id="hero-placeholder"
+      class="hero-placeholder hero-placeholder--blurhash"
       width="<?= $blurhash_w ?>"
       height="<?= $blurhash_h ?>"
       data-blurhash="<?= htmlspecialchars($blurhash) ?>"
       style="aspect-ratio:16/9;width:100%;height:100%;">
     </canvas>
     <img
-      class="hero-img"
+      class="hero-hi-res hero-hi-res--blurhash fade-in"
       width="1200"
       height="675"
       src="<?= $hero_url ?>"
       alt="Hero"
       loading="eager"
-      onload="this.classList.add('loaded');document.getElementById('blurhash-canvas').style.opacity=0;" />
+      onload="this.classList.add('loaded');" />
   </div>
   <div class="container">
     <h1>BlurHash LQIP</h1>
@@ -117,7 +81,7 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
   <script>
     // Render BlurHash to canvas using JS (client-side decode)
     document.addEventListener('DOMContentLoaded', function() {
-      var canvas = document.getElementById('blurhash-canvas');
+      var canvas = document.getElementById('hero-placeholder');
       var blurhash = canvas.dataset.blurhash;
       if (!blurhash) return;
       var width = canvas.width;

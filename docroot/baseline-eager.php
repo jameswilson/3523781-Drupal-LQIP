@@ -18,9 +18,9 @@ $hero_url = 'images/hero.hi-res.jpg.php' . $delay;
 <body>
   <?php $currentPage = basename(__FILE__);
   include 'includes/nav.php'; ?>
-  <div class="hero-wrapper">
+  <div class="hero-wrapper hero-wrapper--baseline-eager">
     <img
-      class="hero"
+      class="hero-hi-res hero-hi-res--baseline-eager"
       width="1200"
       height="675"
       src="<?= $hero_url ?>"

@@ -154,12 +154,87 @@ th.sorted::after {
 .hero-wrapper {
   position: relative;
   width: 100vw;
+  height: auto;
+  min-height: 300px;
   max-width: 1200px;
   margin: 0 auto;
   overflow: hidden;
+  aspect-ratio: 16/9;
 }
 
-.hero {
+.hero-hi-res {
+  max-width: 100%;
+  height: auto;
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.7s;
+}
+
+.fade-in.loaded {
+  opacity: 1;
+}
+
+.blur-12px {
+  filter: blur(12px);
+}
+
+.hero-lo-res--lqip-ultimate,
+.hero-hi-res--lqip-ultimate,
+.hero-hi-res--blurhash,
+.hero-hi-res--css-lqip {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.hero-hi-res--lqip-bmp,
+.hero-hi-res--lqip-png,
+.hero-hi-res--lqip-webp,
+.hero-hi-res--lqip-webp-smooth {
+  display: block;
+  position: absolute;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-placeholder--blurhash {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.hero-placeholder--sqip {
+  display: block;
+  position: absolute;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  top: 0;
+  left: 0;
+}
+
+.hero-placeholder--sqip svg {
+  width: 100%;
+  height: auto;
+}
+
+.hero-hi-res--sqip {
+  display: block;
+  position: relative;
+  width: 100%;
   max-width: 100%;
   height: auto;
 }
