@@ -18,6 +18,15 @@
     "score": 0.94
   },
   {
+    "page": "baseline-eager-fade-in",
+    "url": "/baseline-eager-fade-in.php?delay=1000",
+    "lcp": 3099.4987,
+    "fcp": 1141.4987,
+    "tti": 1191.4987,
+    "si": 3115.337287387584,
+    "score": 0.93
+  },
+  {
     "page": "lqip-bmp",
     "url": "/lqip-bmp.php?delay=1000",
     "lcp": 3168.4512,

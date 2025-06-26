@@ -16,6 +16,11 @@ $pages = [
     'desc' => 'JPG hero image with <code>loading="eager"</code>.'
   ],
   [
+    'label' => 'Baseline Eager Fade-in',
+    'file' => 'baseline-eager-fade-in.php',
+    'desc' => 'JPG hero image with <code>loading="eager"</code> and a fade-in transition effect.'
+  ],
+  [
     'label' => 'LQIP BMP',
     'file' => 'lqip-bmp.php',
     'desc' => 'A simple LQIP technique: a tiny 8x8 BMP bitmap as a background-image, then the full-res image.'

@@ -5,6 +5,7 @@ import lighthouse from 'lighthouse';
 const pages = [
   'baseline-lazy',
   'baseline-eager',
+  'baseline-eager-fade-in',
   'lqip-bmp',
   'lqip-png',
   'lqip-webp',
