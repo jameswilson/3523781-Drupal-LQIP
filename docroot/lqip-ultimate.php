@@ -7,6 +7,8 @@ $lqip_tiny_h = 8;
 $lqip_lcp_w = $display_w;
 $lqip_lcp_h = $display_h;
 $lqip_lcp_path = "images/hero.low-res.webp";
+$min_bpp = 0.05;
+$min_size = intval($lqip_lcp_w * $lqip_lcp_h * $min_bpp);
 $target_bpp = 0.055;
 $target_size = intval($lqip_lcp_w * $lqip_lcp_h * $target_bpp);
 
@@ -154,6 +156,7 @@ $lqip_lcp_url = 'images/hero.low-res.webp.php' . $delay;
     <h1>The Ultimate LQIP technique</h1>
     <p>This page demonstrates the two-level LQIP technique from <a href="https://csswizardry.com/2023/09/the-ultimate-lqip-lcp-technique/">Harry Roberts</a>: a tiny blurred base64 placeholder, then a display-size LQIP image at 0.055 BPP to satisfy LCP, then the full-res image.</p>
     <ul>
+      <li><strong>LQIP-LCP min size:</strong> <?= $min_size ?> bytes (0.05 BPP)</li>
       <li><strong>LQIP-LCP target size:</strong> <?= $target_size ?> bytes (0.055 BPP)</li>
       <li><strong>LQIP-LCP actual size:</strong> <?= file_exists($lqip_lcp_path) ? filesize($lqip_lcp_path) : '?' ?> bytes</li>
       <li><strong>Tiny WebP base64 length:</strong> <?= $lqip_tiny_base64_length ?> chars</li>
