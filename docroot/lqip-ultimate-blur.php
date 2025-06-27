@@ -126,7 +126,7 @@ $lqip_lcp_url = 'images/hero.low-res.webp.php' . $delay;
   </div>
   <div class="container">
     <h1>The Ultimate LQIP technique with Blur</h1>
-    <p>This page demonstrates the two-level LQIP technique from <a href="https://csswizardry.com/2023/09/the-ultimate-lqip-lcp-technique/">Harry Roberts</a>: a tiny blurred base64 placeholder, then a display-size LQIP image at 0.055 BPP to satisfy LCP, then the full-res image.</p>
+    <p>This page demonstrates the two-level LQIP technique from <a href="https://csswizardry.com/2023/09/the-ultimate-lqip-lcp-technique/">Harry Roberts</a>: a tiny blurred base64 placeholder, then a display-size LQIP image at 0.055 BPP to satisfy LCP with a blur applied, then the full-res image. Note: <strong>Based on the overall lower Performance Score stats on <a href="/results.php">Results page</a>, it appears that applying the blur to the LQIP-LCP image is having a net negative effect.</strong></p>
     <ul>
       <li><strong>LQIP-LCP min size:</strong> <?= $min_size ?> bytes (0.05 BPP)</li>
       <li><strong>LQIP-LCP target size:</strong> <?= $target_size ?> bytes (0.055 BPP)</li>
