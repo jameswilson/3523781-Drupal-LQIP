@@ -7,9 +7,9 @@ $lqip_tiny_h = 8;
 $lqip_lcp_w = $display_w;
 $lqip_lcp_h = $display_h;
 $lqip_lcp_path = "images/hero.low-res.webp";
-$min_bpp = 0.05;
+$min_bpp = 0.05 / 8; // 0.05 bits per pixel, converted to bytes per pixel
 $min_size = intval($lqip_lcp_w * $lqip_lcp_h * $min_bpp);
-$target_bpp = 0.055;
+$target_bpp = 0.055 / 8; // 0.055 bits per pixel, converted to bytes per pixel
 $target_size = intval($lqip_lcp_w * $lqip_lcp_h * $target_bpp);
 
 // Generate tiny base64 LQIP
@@ -62,7 +62,7 @@ if (!file_exists($lqip_lcp_path)) {
   // Find the quality setting that gets us closest to the target size
   $best_quality = 75;
   $best_diff = PHP_INT_MAX;
-  for ($q = 10; $q <= 90; $q += 2) {
+  for ($q = 1; $q <= 90; $q += 2) {
     ob_start();
     imagewebp($lcp, null, $q);
     $data = ob_get_clean();
